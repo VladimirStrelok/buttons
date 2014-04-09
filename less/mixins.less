@@ -1,0 +1,60 @@
+.make-btn(){
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;  
+  border:none;
+  background:none;
+  margin:@btn-margin;
+  .make-btn-size(@btn-base-padding-vertical, @btn-base-padding-horizontal, @btn-base-font-size, @btn-base-line-height,@btn-base-border-radius);
+  &.btn-block{
+    display: block;
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+    margin-left:0;
+    margin-right:0;
+  }
+
+}
+
+.make-btn-style(@text-color, @bg-color){
+  color:@text-color;
+  background-color:@bg-color;
+  &:hover{
+    background-color:darken(@bg-color, 5%);
+  }
+
+  &:focus,
+  &:active,
+  &.active{
+    background-color:darken(@bg-color, 10%);
+  }
+  &.disabled,
+  &[disabled],
+  fieldset[disabled] &{
+    &,
+    &:hover,
+    &:focus,
+    &:active,
+    &.active {
+      background-color: @bg-color + @btn-disable-shift;
+      color:@text-color + @btn-disable-shift;
+      &.btn-bordered{
+        border: @btn-border-width solid darken(@bg-color, 20%) + @btn-disable-shift;
+      }
+    }
+  }
+  &.btn-bordered{
+    border: @btn-border-width solid darken(@bg-color, 20%);
+  }
+}
+
+.make-btn-size(@padding-vertical; @padding-horizontal; @font-size; @line-height; @border-radius) {
+  padding: @padding-vertical @padding-horizontal;
+  font-size: @font-size;
+  line-height: @line-height;
+  &.btn-rounded{
+    border-radius: @border-radius; 
+  }
+}
+

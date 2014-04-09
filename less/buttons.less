@@ -1,0 +1,38 @@
+@import "variables.less";
+@import "mixins.less";
+
+@black: #000;
+@gray: #bbb;
+@blue: #0074D9;
+@red: #FF4136;
+@yellow: #FFDC00;
+@green: #2ECC40;
+
+.btn{
+  .make-btn();
+}
+
+.btn-small{
+  .make-btn-size(@btn-small-padding-vertical, @btn-small-padding-horizontal, @btn-small-font-size, @btn-small-line-height,@btn-small-border-radius);
+}
+
+.btn-large{
+  .make-btn-size(@btn-large-padding-vertical, @btn-large-padding-horizontal, @btn-large-font-size, @btn-large-line-height,@btn-large-border-radius);
+}
+
+.btn-default{
+  .make-btn-style(@black,@gray);
+}
+.btn-primary{
+  .make-btn-style(@black,@blue);
+}
+.btn-danger{
+  .make-btn-style(@black,@red);
+}
+.btn-warning{
+  .make-btn-style(@black,@yellow);
+}
+.btn-alert{
+  .make-btn-style(@black,@green);
+}
+
