@@ -17,7 +17,8 @@
 
 }
 
-.make-btn-style(@text-color, @bg-color){
+
+.make-btn-style(@text-color, @bg-color, @border-color: darken(@bg-color,30%)){
   color:@text-color;
   background-color:@bg-color;
   &:hover{
@@ -40,12 +41,22 @@
       background-color: @bg-color + @btn-disable-shift;
       color:@text-color + @btn-disable-shift;
       &.btn-bordered{
-        border: @btn-border-width solid darken(@bg-color, 20%) + @btn-disable-shift;
+        border: @btn-border-width solid darken @border-color + @btn-disable-shift;
       }
     }
   }
   &.btn-bordered{
-    border: @btn-border-width solid darken(@bg-color, 20%);
+    border: @btn-border-width solid @border-color;
+  }
+  &.btn-gradient{
+    background: @bg-color;
+    @start: darken(@bg-color,15%);
+    @stop: lighten(@bg-color,15%);
+    background: -webkit-gradient(linear, left bottom, left top, color-stop(0, @start), color-stop(1, @stop));
+    background: -ms-linear-gradient(bottom, @start, @stop);A
+    background: -moz-linear-gradient(center bottom, @start 0%, @stop 100%);
+    background: -o-linear-gradient(@stop, @start);
+    filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=0)",@stop,@start));
   }
 }
 
