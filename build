@@ -1,0 +1,2 @@
+lessc less/buttons.less css/buttons.css
+lessc --compress less/buttons.less css/buttons.min.css
