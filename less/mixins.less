@@ -6,7 +6,7 @@
   background:none;
   margin:@btn-margin;
   .make-btn-size(@btn-base-padding-vertical, @btn-base-padding-horizontal, @btn-base-font-size, @btn-base-line-height,@btn-base-border-radius);
-  &.btn-block{
+  &.&-block{
     display: block;
     width: 100%;
     padding-left: 0;
@@ -44,7 +44,7 @@
       }
     }
   }
-  &.btn-bordered{
+  &.&-bordered{
     border: @btn-border-width solid darken(@bg-color, 20%);
   }
 }
@@ -53,7 +53,7 @@
   padding: @padding-vertical @padding-horizontal;
   font-size: @font-size;
   line-height: @line-height;
-  &.btn-rounded{
+  &.&-rounded{
     border-radius: @border-radius; 
   }
 }
