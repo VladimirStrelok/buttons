@@ -64,6 +64,26 @@
 </fieldset>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.min.js"></script>
-    <script src="js/script.js"></script>
+    <script>
+	$(function() {
+	 var disabled=false;
+	 $("#disable").click(function(){
+	  if(!disabled)
+	  {
+	   $("#fieldset").attr("disabled", "disabled");
+	   $("#disable").text('Enable')
+	   disabled=true;
+	   $("#disable").switchClass( 'btn-danger', 'btn-alert')
+	  }
+	  else
+	  {
+	   $("#fieldset").removeAttr("disabled");
+	   $("#disable").text('Disable')
+	   disabled=false;
+	   $("#disable").switchClass( 'btn-alert', 'btn-danger')
+	  }
+	 });
+	});
+    </script>
   </body>
 </html>
