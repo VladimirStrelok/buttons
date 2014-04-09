@@ -6,6 +6,8 @@
 
 # THANKS
 
+    Dmitry Fadeyev for lesselements 
+
 # TECHNOLOGY COLOPHON
 
     HTML5, CSS3, Less
