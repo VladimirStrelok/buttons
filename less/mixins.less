@@ -1,83 +1,90 @@
 
-.gradient(@color) {
-  background: @color;
-  @start:darken(@color,20%);
-  @stop:lighten(@color,20%);
-  background: -webkit-gradient(linear,
-  left bottom,
-  left top,
-  color-stop(0, @start),
-  color-stop(1, @stop));
-  background: -ms-linear-gradient(bottom,
-  @start,
-  @stop);
-  background: -moz-linear-gradient(center bottom,
-  @start 0%,
-  @stop 100%);
-  background: -o-linear-gradient(@stop,
-  @start);
-  filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=0)",@stop,@start));
-}
-
-.make-btn(){
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;  
-  border:none;
-  background:none;
-  margin:@btn-margin;
-  .make-btn-size(@btn-base-padding-vertical, @btn-base-padding-horizontal, @btn-base-font-size, @btn-base-line-height,@btn-base-border-radius);
-  &.btn-block{
-    display: block;
-    width: 100%;
-    padding-left: 0;
-    padding-right: 0;
-    margin-left:0;
-    margin-right:0;
+//generates the button size
+.make-btn-size(@padding-vertical, @padding-horizontal, @font-size, @line-height, @border-radius) {
+  //sets the padding
+  padding: @padding-vertical @padding-horizontal;
+  
+  //sets the font size
+  font-size: @font-size;
+  
+  //sets the line-height
+  line-height: @line-height;
+  
+  //generates the rounded class based on the border radius class
+  &.btn-rounded{
+    .border-radius(@border-radius); 
   }
 }
 
-.make-btn-style(@text-color, @bg-color, @border-color: darken(@bg-color,30%)){
+//generates the button style
+.make-btn-style(@text-color, @bg-color, @border-color: darken(@bg-color,@btn-border-color-darken)){
+  //sets the text and background colors
   color:@text-color;
   background-color:@bg-color;
+  
+  // sets the hover state
   &:hover{
-    background-color:darken(@bg-color, 5%);
+    background-color:darken(@bg-color, @btn-hover-darken);
   }
-
-  &:focus,
+  
+  // sets the focus state
+  &:focus{
+    background-color:darken(@bg-color, @btn-focus-darken);
+  }
+  
+  // sets the active state and allose for an active class to be applied to the button
   &:active,
   &.active{
-    background-color:darken(@bg-color, 10%);
+    background-color:darken(@bg-color, @btn-active-darken);
   }
+  
+  // sets up the button border, based on the @border-color, defaults to a derivitive of the background color
+  &.btn-bordered{
+    border: @btn-border-width solid @border-color;
+  }
+  
+  // setsd up the disabled state, works if the button is disabled, the button has the disabled class, or if the button is in a disabled fieldset
   &.disabled,
   &[disabled],
   fieldset[disabled] &{
+    // sets the styling for all states and the active class for the disabled state
     &,
     &:hover,
     &:focus,
     &:active,
     &.active {
-      background-color: desaturate(@bg-color, 50%);
-      color:desaturate(@text-color, 50%);
-      &.btn-bordered{
-        border: @btn-border-width solid desaturate(@border-color, 50%);
-      }
+      // lightens and desaturates the background color and text color
+      background-color: lighten(desaturate(@bg-color, @btn-disable-saturate),@btn-disable-lighten);
+      color:lighten(desaturate(@text-color, @btn-disable-saturate),@btn-disable-lighten);
     }
   }
-  &.btn-bordered{
-    border: @btn-border-width solid @border-color;
-  }
+  
+  // the gradient settings, changes most of the background to gradients
   &.btn-gradient{
-    .gradient(@bg-color);
+    // sets up the start and end gradients for the button
+    @gradient-start:lighten(@bg-color,@btn-gradient-shift/2);
+    @gradient-end:darken(@bg-color,@btn-gradient-shift/2);
+    
+    // sets the background image to a liner gradient
+    .background-image(linear-gradient(to bottom, @gradient-start 0%, @gradient-end 100%));
+    
+    // sets up the hover state gradient
     &:hover{
-      .gradient(darken(@bg-color, 5%));
+      .background-image(linear-gradient(to bottom, darken(@gradient-start, @btn-hover-darken) 0%, darken(@gradient-end, @btn-hover-darken) 100%));
     }
-
-    &:focus,
+    
+    // sets up the focus state gradient
+    &:focus{
+      .background-image(linear-gradient(to bottom, darken(@gradient-start, @btn-focus-darken) 0%, darken(@gradient-end, @btn-focus-darken) 100%));
+    }
+    
+    // sets up the active state and active class gradient
     &:active,
     &.active{
-      .gradient(darken(@bg-color, 10%));
+      .background-image(linear-gradient(to bottom, darken(@gradient-start, @btn-active-darken) 0%, darken(@gradient-end, @btn-active-darken) 100%));
     }
+    
+    //sets up the disabled stated for the gradient
     &.disabled,
     &[disabled],
     fieldset[disabled] &{
@@ -86,24 +93,10 @@
       &:focus,
       &:active,
       &.active {
-       .gradient(desaturate(@bg-color, 50%));
-        color:desaturate(@text-color, 50%);
-        &.btn-bordered{
-          border: @btn-border-width solid desaturate(@border-color, 50%);
-        }
+        // generates a new gradient based on lightened and desaturated colors
+        .background-image(linear-gradient(to bottom, lighten(desaturate(@gradient-start, @btn-disable-saturate),@btn-disable-lighten) 0%, lighten(desaturate(@gradient-end, @btn-disable-saturate),@btn-disable-lighten) 100%));
+        color:lighten(desaturate(@text-color, @btn-disable-saturate),@btn-disable-lighten);
       }
     }
-    &.btn-bordered{
-      border: @btn-border-width solid @border-color;
-    }
-  }
-}
-
-.make-btn-size(@padding-vertical; @padding-horizontal; @font-size; @line-height; @border-radius) {
-  padding: @padding-vertical @padding-horizontal;
-  font-size: @font-size;
-  line-height: @line-height;
-  &.btn-rounded{
-    border-radius: @border-radius; 
   }
 }
