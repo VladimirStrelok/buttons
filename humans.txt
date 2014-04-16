@@ -6,7 +6,7 @@
 
 # THANKS
 
-    Dmitry Fadeyev for lesselements 
+    CSSHAT team for LESSHAT
 
 # TECHNOLOGY COLOPHON
 
