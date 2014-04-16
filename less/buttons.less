@@ -1,38 +1,78 @@
 @import "variables.less";
 @import "mixins.less";
 
-@black: #000;
-@gray: #bbb;
-@blue: #0074D9;
-@red: #FF4136;
-@yellow: #FFDC00;
-@green: #2ECC40;
+//Sizing
 
+@btn-base-padding-horizontal: .8em;
+@btn-base-padding-vertical: .45em;
+@btn-base-font-size: 1em;
+@btn-base-line-height: 1.5;
+@btn-base-border-radius:.3em;
+
+@btn-small-padding-horizontal: .5em;
+@btn-small-padding-vertical: .3em ;
+@btn-small-font-size: .9em;
+@btn-small-line-height: 1.5;
+@btn-small-border-radius:.2em;
+
+@btn-large-padding-horizontal: .8em ;
+@btn-large-padding-vertical: .6em ;
+@btn-large-font-size: 1.6em;
+@btn-large-line-height: 1;
+@btn-large-border-radius:.5em;
+
+//Colors
+
+@btn-default-text:#000;
+@btn-default-background:#A5D3FF;
+
+@btn-primary-text:#000;
+@btn-primary-background:#7EE8B6;
+
+@btn-danger-text:#000;
+@btn-danger-background:#FFA19A;
+
+@btn-warning-text:#000;
+@btn-warning-background:#E8B389;
+
+@btn-alert-text:#000;
+@btn-alert-background:#FFF393;
+
+// Make the btn class and adds the base sizing
 .btn{
   .make-btn();
+  .make-btn-size(@btn-base-padding-vertical, @btn-base-padding-horizontal, @btn-base-font-size, @btn-base-line-height,@btn-base-border-radius);
 }
 
+// Make small size
 .btn-small{
   .make-btn-size(@btn-small-padding-vertical, @btn-small-padding-horizontal, @btn-small-font-size, @btn-small-line-height,@btn-small-border-radius);
 }
 
+// Make Large Size
 .btn-large{
   .make-btn-size(@btn-large-padding-vertical, @btn-large-padding-horizontal, @btn-large-font-size, @btn-large-line-height,@btn-large-border-radius);
 }
 
+//Make the default button
 .btn-default{
-  .make-btn-style(@black,@gray);
-}
-.btn-primary{
-  .make-btn-style(@black,@blue);
-}
-.btn-danger{
-  .make-btn-style(@black,@red);
-}
-.btn-warning{
-  .make-btn-style(@black,@yellow);
-}
-.btn-alert{
-  .make-btn-style(@black,@green);
+  .make-btn-style(@btn-default-text,@btn-default-background);
 }
 
+// Make the primary button
+.btn-primary{
+  .make-btn-style(@btn-primary-text,@btn-primary-background);
+}
+
+// Make the danger button
+.btn-danger{
+  .make-btn-style(@btn-danger-text,@btn-danger-background);
+}
+//Make the warning button
+.btn-warning{
+  .make-btn-style(@btn-warning-text,@btn-warning-background);
+}
+//Make the alert button
+.btn-alert{
+  .make-btn-style(@btn-alert-text,@btn-alert-background);
+}
